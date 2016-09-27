@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Invoices &mdash; xERP</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.custom.css}" />
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery.dataTables.css}" />
+        <link rel="stylesheet" th:href="@{/css/xerp.min.css}" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
+    </head>
+    <body>
+
+        <div id="page-wrapper" class="active">
+
+            <div th:replace="fragments/sidebar"></div>
+
+            <div id="content-wrapper">
+                <div class="page-content">
+
+                    <div th:replace="fragments/header"></div>
+
+                    <div class="row">
+
+                        <div id="notificationMSG" style="display:none"></div>
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <!--<button type="button" class="btn btn-warning pull-left" style="margin-right:10px;" onclick="window.location.href = '/dashboard'">Back</button>-->
+                                    <h5 id="clientsTableTitle"><i class="fa fa-tasks"></i><span class="break"></span> Invoices</h5>
+                                    <div class="btn-group pull-right">
+                                        <a type="submit" class="btn btn-default" style="margin-top:-35px;" href="/invoice/add" > Add Invoice</a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <!--<div id="loadingValues" class="load"><div class="load-top"></div><div class="load-bottom"></div></div>-->
+                                    <table id="invoicesTable" class="table table-striped table-bordered datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                                <th>VAT</th>
+                                                <th>Issue Date</th>
+                                                <th>Client</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="invoice : ${allInvoices}">
+                                                <td><span th:text="${invoice.id}"></span></td>
+                                                <td><span th:text="${invoice.description}"></span></td>
+                                                <td><span th:text="${invoice.amount}"></span></td>
+                                                <td><span th:text="${invoice.vat}"></span></td>
+                                                <td><span th:text="${invoice.getIssueDateTimestamp()}"></span></td>
+                                                <td><span th:text="${invoice.clientId.lastName} + ' ' + ${invoice.clientId.firstName}"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div><!-- End Page Content -->
+            </div><!-- End Content Wrapper -->
+        </div><!-- End Page Wrapper -->
+
+        <script th:src="@{/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.dataTables.min.EN.js}"></script>
+        <script th:src="@{/js/jquery-ui.min.js}"></script>
+        <script th:src="@{/js/moment.js}"></script>
+        <script th:src="@{/js/xerp.min.js}"></script>
+        <script th:src="@{/js/invoices.js}"></script>
+    </body>
+</html>

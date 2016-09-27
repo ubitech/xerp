@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login &mdash; PaaSword</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+        <link th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+        <link th:href="@{css/dashboard.css}" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <img width="400px" max-width="100vw" th:src="@{images/logo-login.png}" />
+
+            <form role="form" th:action="@{/login}" method="post" class="login-form" autocomplete="off">
+                <input th:if="${_csrf}" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">Wrong username or password.</div>
+                <div th:if="${new_registration}" class="alert alert-success" role="alert"><p th:text="${new_registration}"></p></div>
+
+                <h5 class="heading">Log in with your account</h5>
+
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" name="username" th:value="${username}" class="form-control" placeholder="Username" required="true" autofocus="true"/>
+
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" name="password" th:value="${password}" class="form-control" placeholder="Password" required="true"/>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me" id="remember-me" /> Stay signed in
+                    </label>
+                </div>
+
+                <input type="submit" value="Sign in" class="btn btn-lg btn-danger btn-block"/>
+                <!--<input type="submit" value="Forgot password?" class="btn btn-link"/>-->
+            </form>
+
+        </div>
+
+        <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    </body>
+</html>

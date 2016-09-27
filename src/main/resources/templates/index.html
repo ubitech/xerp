@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Welcome &mdash; xERP</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+        <link rel="stylesheet" th:href="@{/css/xerp.min.css}" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
+        
+    </head>
+    <body>
+
+        <div class="container">
+            <img th:src="@{images/logo-login.png}" width="400px" max-width="100vw"  />
+            <div class="alert alert-warning">Welcome to xERP!</div>
+        </div>
+
+        <script th:src="@{/js/jquery-2.1.1.min.js}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Add Student &mdash; xERP</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.custom.css}" />
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery.dataTables.css}" />
+        <link rel="stylesheet" th:href="@{/css/xerp.min.css}" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
+    </head>
+    <body>
+
+        <div id="page-wrapper" class="active">
+
+            <div th:replace="fragments/sidebar"></div>
+
+            <div id="content-wrapper">
+                <div class="page-content">
+
+                    <div th:replace="fragments/header"></div>
+
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5><strong>Add new Student</strong></h5>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Name:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="studentName" class="form-control" placeholder=""/>
+                                            <span class="help-block">Name of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Surname:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="surname" class="form-control" placeholder=""/>
+                                            <span class="help-block">Surname of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Date of Birth:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="dateOfBirth"  class="form-control" placeholder=""/>
+                                            <span class="help-block">Date of Birth of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Gender:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="gender"  class="form-control" placeholder=""/>
+                                            <span class="help-block">Gender of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Semester:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="semester"  class="form-control" placeholder=""/>
+                                            <span class="help-block">Semester of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Grade:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="grade"  class="form-control" placeholder=""/>
+                                            <span class="help-block">Grade of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">University:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="university"  class="form-control" placeholder=""/>
+                                            <span class="help-block">University of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Faculty:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="faculty"  class="form-control" placeholder=""/>
+                                            <span class="help-block">Faculty of the Student</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-footer">
+                                        <button onclick="addStudent();" class="btn btn-primary" aria-expanded="false">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div><!-- End Page Content -->
+            </div><!-- End Content Wrapper -->
+        </div><!-- End Page Wrapper -->
+
+        <script th:src="@{/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.dataTables.min.EN.js}"></script>
+        <script th:src="@{/js/jquery-ui.min.js}"></script>
+        <script th:src="@{/js/moment.js}"></script>
+        <script th:src="@{/js/xerp.min.js}"></script>
+        <script th:src="@{/js/addStudent.js}"></script>
+    </body>
+</html>

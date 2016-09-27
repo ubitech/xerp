@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Add Faculty &mdash; xERP</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.custom.css}" />
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery.dataTables.css}" />
+        <link rel="stylesheet" th:href="@{/css/xerp.min.css}" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
+    </head>
+    <body>
+
+        <div id="page-wrapper" class="active">
+
+            <div th:replace="fragments/sidebar"></div>
+
+            <div id="content-wrapper">
+                <div class="page-content">
+
+                    <div th:replace="fragments/header"></div>
+
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5><strong>Add new Faculty</strong></h5>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="text-input">Name:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" id="facultyName" class="form-control" placeholder=""/>
+                                            <span class="help-block">Name of the Faculty</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-footer">
+                                        <button onclick="addFaculty();" class="btn btn-primary" aria-expanded="false">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div><!-- End Page Content -->
+            </div><!-- End Content Wrapper -->
+        </div><!-- End Page Wrapper -->
+
+        <script th:src="@{/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.dataTables.min.EN.js}"></script>
+        <script th:src="@{/js/jquery-ui.min.js}"></script>
+        <script th:src="@{/js/moment.js}"></script>
+        <script th:src="@{/js/xerp.min.js}"></script>
+        <script th:src="@{/js/addFaculty.js}"></script>
+    </body>
+</html>

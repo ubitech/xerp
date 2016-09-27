@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cities &mdash; xERP</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />	
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.custom.css}" />
+        <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/jquery.dataTables.css}" />
+        <link rel="stylesheet" th:href="@{/css/xerp.min.css}" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
+    </head>
+    <body>
+
+        <div id="page-wrapper" class="active">
+
+            <div th:replace="fragments/sidebar"></div>
+
+            <div id="content-wrapper">
+                <div class="page-content">
+
+                    <div th:replace="fragments/header"></div>
+
+                    <div class="row">
+
+                        <div id="notificationMSG" style="display:none"></div>
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 id="citiesTableTitle"><i class="fa fa-tasks"></i><span class="break"></span> Cities</h5>
+                                    <div class="btn-group pull-right">
+                                        <a class="btn btn-default" style="margin-top:-35px;" href="/city/add" > Add City</a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="citiesTable" class="table table-striped table-bordered datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Country</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="city : ${allCities}">
+                                                <td><span th:text="${city.id}"></span></td>
+                                                <td><span th:text="${city.name}"></span></td>
+                                                <td><span th:text="${city.country}"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div><!-- End Page Content -->
+            </div><!-- End Content Wrapper -->
+        </div><!-- End Page Wrapper -->
+
+        <script th:src="@{/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.dataTables.min.EN.js}"></script>
+        <script th:src="@{/js/jquery-ui.min.js}"></script>
+        <script th:src="@{/js/moment.js}"></script>
+        <script th:src="@{/js/xerp.min.js}"></script>
+        <script th:src="@{/js/cities.js}"></script>
+    </body>
+</html>
