@@ -3,15 +3,14 @@ package com.mycompany.xerp.web;
 import com.mycompany.xerp.domain.*;
 import com.mycompany.xerp.response.BasicResponseCode;
 import com.mycompany.xerp.response.XERPRestResponse;
-import com.mycompany.xerp.trasferObjects.TCountry;
-import com.mycompany.xerp.trasferObjects.TFaculty;
-import com.mycompany.xerp.trasferObjects.TStudent;
-import com.mycompany.xerp.trasferObjects.TUniversity;
+import com.mycompany.xerp.trasferObjects.*;
 import eu.paasword.jpa.PaaSwordEntityHandler;
 import eu.paasword.jpa.exceptions.NotAValidPaaSwordEntityException;
 import eu.paasword.jpa.exceptions.ProxyInitializationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -30,11 +29,48 @@ public class RestAPIController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/city")
-    public XERPRestResponse addCity(@RequestBody City city) {
+    public XERPRestResponse addCity(@RequestBody TCity tCity) {
 
-        // Adding City
+       try {
 
-        return new XERPRestResponse(BasicResponseCode.SUCCESS, Message.CITY_ADDED, Optional.empty());
+           PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
+
+           // Adding City
+           Country country = new Country();
+           country.setId(tCity.getCountryID());
+
+           City city = new City();
+           city.setName(tCity.getName());
+           city.setCountry(country);
+
+           entityHandler.save(city);
+
+           return new XERPRestResponse(BasicResponseCode.SUCCESS, Message.CITY_ADDED, Optional.empty());
+
+       } catch (NotAValidPaaSwordEntityException | ProxyInitializationException e) {
+           logger.severe(e.getMessage());
+           return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.CITY_ERROR, Optional.empty());
+
+       }
+
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/city/{id}")
+    public XERPRestResponse deleteCity(@PathVariable long id) {
+
+        try {
+
+            PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
+
+            entityHandler.delete(id, City.class);
+
+            return new XERPRestResponse(BasicResponseCode.SUCCESS, Message.CITY_DELETED, Optional.empty());
+
+        } catch (ProxyInitializationException e) {
+            logger.severe(e.getMessage());
+            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.CITY_ERROR, Optional.empty());
+
+        }
 
     }
 
@@ -98,7 +134,7 @@ public class RestAPIController {
 
         } catch (NotAValidPaaSwordEntityException | ProxyInitializationException e) {
             logger.severe(e.getMessage());
-            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.COUNTRY_ERROR, Optional.empty());
+            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.FACULTY_ERROR, Optional.empty());
 
         }
 
@@ -117,7 +153,7 @@ public class RestAPIController {
 
         } catch (ProxyInitializationException e) {
             logger.severe(e.getMessage());
-            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.COUNTRY_ERROR, Optional.empty());
+            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.FACULTY_ERROR, Optional.empty());
 
         }
 
@@ -128,15 +164,34 @@ public class RestAPIController {
 
         try {
 
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
             PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
 
             // Adding Student
+            University university = new University();
+            university.setId(tStudent.getUniversityID());
+
+            Faculty faculty = new Faculty();
+            faculty.setId(tStudent.getFacultyID());
+
+            Student student = new Student();
+            student.setName(tStudent.getName());
+            student.setSurname(tStudent.getSurname());
+            student.setBirth_date(formatter.parse(tStudent.getDateOfBirth()));
+            student.setGender(tStudent.isGender());
+            student.setGrade(tStudent.getGrade());
+            student.setSemester(tStudent.getSemester());
+            student.setFaculty(faculty);
+            student.setUniversity(university);
+
+            entityHandler.save(student);
 
             return new XERPRestResponse(BasicResponseCode.SUCCESS, Message.STUDENT_ADDED, Optional.empty());
 
-        } catch (ProxyInitializationException e) {
+        } catch (ProxyInitializationException | NotAValidPaaSwordEntityException | ParseException e) {
             logger.severe(e.getMessage());
-            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.COUNTRY_ERROR, Optional.empty());
+            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.STUDENT_ERROR, Optional.empty());
 
         }
 
@@ -155,7 +210,7 @@ public class RestAPIController {
 
         } catch (ProxyInitializationException e) {
             logger.severe(e.getMessage());
-            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.COUNTRY_ERROR, Optional.empty());
+            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.STUDENT_ERROR, Optional.empty());
 
         }
 
@@ -169,12 +224,21 @@ public class RestAPIController {
             PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
 
             // Adding University
+            City city = new City();
+            city.setId(tUniversity.getCityID());
+
+            University university = new University();
+            university.setName(tUniversity.getUniversityName());
+            university.setNumber_of_lecutre_halls(tUniversity.getNumberOfLectureHalls());
+            university.setCity(city);
+
+            entityHandler.save(university);
 
             return new XERPRestResponse(BasicResponseCode.SUCCESS, Message.UNIVERSITY_ADDED, Optional.empty());
 
-        } catch (ProxyInitializationException e) {
+        } catch (ProxyInitializationException | NotAValidPaaSwordEntityException e) {
             logger.severe(e.getMessage());
-            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.COUNTRY_ERROR, Optional.empty());
+            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.UNIVERSITY_ERROR, Optional.empty());
 
         }
 
@@ -193,7 +257,7 @@ public class RestAPIController {
 
         } catch (ProxyInitializationException e) {
             logger.severe(e.getMessage());
-            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.COUNTRY_ERROR, Optional.empty());
+            return new XERPRestResponse(BasicResponseCode.EXCEPTION, Message.UNIVERSITY_ERROR, Optional.empty());
 
         }
 

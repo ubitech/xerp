@@ -48,6 +48,7 @@
                                                 <th>Grade</th>
                                                 <th>University</th>
                                                 <th>Faculty</th>
+                                                <th>Commands</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,8 +60,13 @@
                                                 <td><span th:text="${student.gender}"></span></td>
                                                 <td><span th:text="${student.semester}"></span></td>
                                                 <td><span th:text="${student.grade}"></span></td>
-                                                <td><span th:text="${student.university}"></span></td>
-                                                <td><span th:text="${student.faculty}"></span></td>
+                                                <td><span th:text="${student.university.name}"></span></td>
+                                                <td><span th:text="${student.faculty.name}"></span></td>
+                                                <td>
+                                                    <a th:href="'javascript:removeStudent(' + ${student.id} + ');'" class="btn btn-default">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

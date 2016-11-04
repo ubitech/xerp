@@ -22,8 +22,9 @@ import java.io.Serializable;
  */
 public class TCity implements Serializable {
 
+    private long id;
     private String name;
-    private String country;
+    private long countryID;
 
     public TCity() {
     }
@@ -36,11 +37,19 @@ public class TCity implements Serializable {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
+    public long getCountryID() {
+        return countryID;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryID(long countryID) {
+        this.countryID = countryID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

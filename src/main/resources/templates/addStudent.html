@@ -58,7 +58,10 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="text-input">Gender:</label>
                                         <div class="col-md-9">
-                                            <input type="text" id="gender"  class="form-control" placeholder=""/>
+                                            <select id="gender" class="form-control">
+                                                <option value="true">Male</option>
+                                                <option value="false">Female</option>
+                                            </select>
                                             <span class="help-block">Gender of the Student</span>
                                         </div>
                                     </div>
@@ -82,7 +85,9 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="text-input">University:</label>
                                         <div class="col-md-9">
-                                            <input type="text" id="university"  class="form-control" placeholder=""/>
+                                            <select id="university" class="form-control">
+                                                <option th:each="university : ${universities}" th:value="${university.id}" th:text="${university.name}"/>
+                                            </select>
                                             <span class="help-block">University of the Student</span>
                                         </div>
                                     </div>
@@ -90,7 +95,9 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="text-input">Faculty:</label>
                                         <div class="col-md-9">
-                                            <input type="text" id="faculty"  class="form-control" placeholder=""/>
+                                            <select id="faculty" class="form-control">
+                                                <option th:each="faculty : ${faculties}" th:value="${faculty.id}" th:text="${faculty.name}"/>
+                                            </select>
                                             <span class="help-block">Faculty of the Student</span>
                                         </div>
                                     </div>

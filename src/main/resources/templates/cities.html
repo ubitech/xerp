@@ -42,13 +42,19 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Country</th>
+                                                <th>Commands</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="city : ${allCities}">
                                                 <td><span th:text="${city.id}"></span></td>
                                                 <td><span th:text="${city.name}"></span></td>
-                                                <td><span th:text="${city.country}"></span></td>
+                                                <td><span th:text="${city.country.name}"></span></td>
+                                                <td>
+                                                    <a th:href="'javascript:removeCity(' + ${city.id} + ');'" class="btn btn-default">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

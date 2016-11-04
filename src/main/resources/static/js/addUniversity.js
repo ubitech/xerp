@@ -5,7 +5,7 @@ function addUniversity() {
     var university = new Object();
     university.name = $("#universityName").val();
     university.numberOfLectureHalls = $("#numberOfLectureHalls").val();
-    university.city = $("#city").val();
+    university.cityID = $("#city").val();
 
     //Make the add call
     $.ajax({

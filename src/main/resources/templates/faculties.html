@@ -41,13 +41,18 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Inhabitants</th>
+                                                <th>Commands</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr th:each="faculty : ${allFaculties}">
                                                 <td><span th:text="${faculty.id}"></span></td>
                                                 <td><span th:text="${faculty.name}"></span></td>
+                                                <td>
+                                                    <a th:href="'javascript:removeFaculty(' + ${faculty.id} + ');'" class="btn btn-default">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

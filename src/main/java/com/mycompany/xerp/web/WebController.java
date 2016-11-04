@@ -72,6 +72,27 @@ public class WebController {
         model.addAttribute("currentUser", getCurrentUser());
 //        model.addAttribute("allClients", clientService.findAll());
 
+        List<City> listOfCities = new ArrayList<>();
+
+        try {
+
+            PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
+
+            List<Object> cities = entityHandler.findAll(City.class);
+            for (Iterator<Object> it = cities.iterator(); it.hasNext(); ) {
+                City city = (City) it.next();
+                Country country = (Country) entityHandler.findOne(city.getCountry().getId(), Country.class);
+                city.setCountry(country);
+                listOfCities.add(city);
+//                logger.info("ID: " + city.getId() + ", Name: " + city.getName() + ", Country: " + city.getCountry().getName());
+            }
+
+        } catch (ProxyInitializationException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("allCities", listOfCities);
+
         return "cities";
     }
 
@@ -104,8 +125,10 @@ public class WebController {
             List<Object> cities = entityHandler.findAll(City.class);
             for (Iterator<Object> it = cities.iterator(); it.hasNext(); ) {
                 City city = (City) it.next();
+                Country country = (Country) entityHandler.findOne(city.getCountry().getId(), Country.class);
+                city.setCountry(country);
                 listOfCities.add(city);
-                logger.info("ID: " + city.getId() + ", Name: " + city.getName() + ", Country: " + city.getCountry().getName());
+//                logger.info("ID: " + city.getId() + ", Name: " + city.getName() + ", Country: " + city.getCountry().getName());
             }
 
         } catch (ProxyInitializationException e) {
@@ -121,6 +144,26 @@ public class WebController {
     public String cityAdd(Model model) {
         logger.log(Level.INFO, "Success login for user: {0} , with userID: {1} and role: {2}", new Object[]{getCurrentUser().getUsername()});//, getCurrentUser().getId(), getCurrentUser().getRole()});
         model.addAttribute("currentUser", getCurrentUser());
+
+        List<Country> listOfCountries = new ArrayList<>();
+
+        try {
+
+            PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
+
+            List<Object> countries = entityHandler.findAll(Country.class);
+            for (Iterator<Object> it = countries.iterator(); it.hasNext(); ) {
+                Country country = (Country) it.next();
+                listOfCountries.add(country);
+//                logger.info("ID: " + country.getId() + ", Name: " + country.getName() + ", Inhabitants: " + country.getInhabitants());
+            }
+
+        } catch (ProxyInitializationException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("countries", listOfCountries);
+
         return "addCity";
     }
 
@@ -135,11 +178,11 @@ public class WebController {
 
             PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
 
-            List<Object> countries = entityHandler.findAll(Country.class);
-            for (Iterator<Object> it = countries.iterator(); it.hasNext();) {
+            List countries = entityHandler.findAll(Country.class);
+            for (Iterator it = countries.iterator(); it.hasNext(); ) {
                 Country country = (Country) it.next();
                 listOfCountries.add(country);
-                logger.info("ID: " + country.getId() + ", Name: " + country.getName() + ", Inhabitants: " + country.getInhabitants());
+//                logger.info("ID: " + country.getId() + ", Name: " + country.getName() + ", Inhabitants: " + country.getInhabitants());
             }
 
         } catch (ProxyInitializationException e) {
@@ -171,10 +214,10 @@ public class WebController {
             PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
 
             List<Object> faculties = entityHandler.findAll(Faculty.class);
-            for (Iterator<Object> it = faculties.iterator(); it.hasNext();) {
+            for (Iterator<Object> it = faculties.iterator(); it.hasNext(); ) {
                 Faculty faculty = (Faculty) it.next();
                 listOfFaculties.add(faculty);
-                logger.info("ID: " + faculty.getId() + ", Name: " + faculty.getName());
+//                logger.info("ID: " + faculty.getId() + ", Name: " + faculty.getName());
             }
 
         } catch (ProxyInitializationException e) {
@@ -204,11 +247,15 @@ public class WebController {
 
             PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
 
-            List<Object> students = entityHandler.findAll(Faculty.class);
-            for (Iterator<Object> it = students.iterator(); it.hasNext();) {
+            List<Object> students = entityHandler.findAll(Student.class);
+            for (Iterator<Object> it = students.iterator(); it.hasNext(); ) {
                 Student student = (Student) it.next();
+                University university = (University) entityHandler.findOne(student.getUniversity().getId(), University.class);
+                Faculty faculty = (Faculty) entityHandler.findOne(student.getFaculty().getId(), Faculty.class);
+                student.setUniversity(university);
+                student.setFaculty(faculty);
                 listOfStudents.add(student);
-                logger.info("ID: " + student.getId() + ", Name: " + student.getName() + ", Surname: " + student.getSurname() + ", Birth date: " + student.getBirth_date() + ", Gender: " + student.isGender() + ", Semester: " + student.getSemester() + ", Grade: " + student.getGrade() + ", University: " +  student.getUniversity().getName() + ", Faculty: " + student.getFaculty().getName());
+//                logger.info("ID: " + student.getId() + ", Name: " + student.getName() + ", Surname: " + student.getSurname() + ", Birth date: " + student.getBirth_date() + ", Gender: " + student.isGender() + ", Semester: " + student.getSemester() + ", Grade: " + student.getGrade() + ", University: " +  student.getUniversity().getName() + ", Faculty: " + student.getFaculty().getName());
             }
 
         } catch (ProxyInitializationException e) {
@@ -224,6 +271,39 @@ public class WebController {
     public String studentAdd(Model model) {
         logger.log(Level.INFO, "Success login for user: {0} , with userID: {1} and role: {2}", new Object[]{getCurrentUser().getUsername()});//, getCurrentUser().getId(), getCurrentUser().getRole()});
         model.addAttribute("currentUser", getCurrentUser());
+
+        List<University> listOfUniversities = new ArrayList<>();
+        List<Faculty> listOfFaculties = new ArrayList<>();
+
+        try {
+
+            PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
+
+            List<Object> universities = entityHandler.findAll(University.class);
+            for (Iterator<Object> it = universities.iterator(); it.hasNext(); ) {
+                University university = (University) it.next();
+                City city = (City) entityHandler.findOne(university.getCity().getId(), City.class);
+                university.setCity(city);
+                listOfUniversities.add(university);
+//                logger.info("ID: " + university.getId() + ", Name: " + university.getName() + ", Lecture Halls: " + university.getNumber_of_lecutre_halls() + ", City: " + university.getCity().getName());
+            }
+
+
+            List<Object> faculties = entityHandler.findAll(Faculty.class);
+            for (Iterator<Object> it = faculties.iterator(); it.hasNext(); ) {
+                Faculty faculty = (Faculty) it.next();
+                listOfFaculties.add(faculty);
+//                logger.info("ID: " + faculty.getId() + ", Name: " + faculty.getName());
+            }
+
+
+        } catch (ProxyInitializationException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("universities", listOfUniversities);
+        model.addAttribute("faculties", listOfFaculties);
+
         return "addStudent";
     }
 
@@ -238,11 +318,13 @@ public class WebController {
 
             PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
 
-            List<Object> universities = entityHandler.findAll(Faculty.class);
-            for (Iterator<Object> it = universities.iterator(); it.hasNext();) {
+            List<Object> universities = entityHandler.findAll(University.class);
+            for (Iterator<Object> it = universities.iterator(); it.hasNext(); ) {
                 University university = (University) it.next();
+                City city = (City) entityHandler.findOne(university.getCity().getId(), City.class);
+                university.setCity(city);
                 listOfUniversities.add(university);
-                logger.info("ID: " + university.getId() + ", Name: " + university.getName() + ", Lecture Halls: " + university.getNumber_of_lecutre_halls() + ", City: " + university.getCity().getName());
+//                logger.info("ID: " + university.getId() + ", Name: " + university.getName() + ", Lecture Halls: " + university.getNumber_of_lecutre_halls() + ", City: " + university.getCity().getName());
             }
 
         } catch (ProxyInitializationException e) {
@@ -258,6 +340,28 @@ public class WebController {
     public String universityAdd(Model model) {
         logger.log(Level.INFO, "Success login for user: {0} , with userID: {1} and role: {2}", new Object[]{getCurrentUser().getUsername()});//, getCurrentUser().getId(), getCurrentUser().getRole()});
         model.addAttribute("currentUser", getCurrentUser());
+
+        List<City> listOfCities = new ArrayList<>();
+
+        try {
+
+            PaaSwordEntityHandler entityHandler = PaaSwordEntityHandler.getInstance();
+
+            List<Object> cities = entityHandler.findAll(City.class);
+            for (Iterator<Object> it = cities.iterator(); it.hasNext(); ) {
+                City city = (City) it.next();
+                Country country = (Country) entityHandler.findOne(city.getCountry().getId(), Country.class);
+                city.setCountry(country);
+                listOfCities.add(city);
+//                logger.info("ID: " + city.getId() + ", Name: " + city.getName() + ", Country: " + city.getCountry().getName());
+            }
+
+        } catch (ProxyInitializationException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("cities", listOfCities);
+
         return "addUniversity";
     }
 
@@ -280,6 +384,7 @@ public class WebController {
     /*
      *  Help Methods
      */
+
     /**
      * Retrieve the current logged-in user
      *

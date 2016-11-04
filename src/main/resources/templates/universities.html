@@ -43,6 +43,7 @@
                                                 <th>Name</th>
                                                 <th>Number of Lecture Halls</th>
                                                 <th>City</th>
+                                                <th>Commands</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,7 +51,12 @@
                                                 <td><span th:text="${university.id}"></span></td>
                                                 <td><span th:text="${university.name}"></span></td>
                                                 <td><span th:text="${university.number_of_lecutre_halls}"></span></td>
-                                                <td><span th:text="${university.city}"></span></td>
+                                                <td><span th:text="${university.city.name}"></span></td>
+                                                <td>
+                                                    <a th:href="'javascript:removeUniversity(' + ${university.id} + ');'" class="btn btn-default">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

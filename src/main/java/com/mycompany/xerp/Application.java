@@ -35,8 +35,9 @@ public class Application {
 
     @Bean
     public PaaSwordAPI paaSwordAPI() {
-        return new PaaSwordAPI("http://app.paasword.eu", "6e633b56-95da-4d33-8132-4cd8883a6b98", "com.mycompany.xerp", true);
-//        return new PaaSwordAPI("http://localhost:8080", "6e633b56-95da-4d33-8132-4cd8883a6b98", "com.mycompany.xerp", true);
+        return new PaaSwordAPI("http://app.paasword.eu", "00c34888-50c6-4368-a5da-da2e8e321824", "com.mycompany.xerp", true);
+//        return new PaaSwordAPI("http://192.168.3.51:8080", "00c34888-50c6-4368-a5da-da2e8e321824", "com.mycompany.xerp", true);
+//        return new PaaSwordAPI("http://localhost:8080", "00c34888-50c6-4368-a5da-da2e8e321824", "com.mycompany.xerp", true);
     }
 
 }

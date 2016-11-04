@@ -22,34 +22,43 @@ import java.io.Serializable;
  */
 public class TUniversity implements Serializable {
 
-    private String name;
-    private String numberOfLectureHalls;
-    private String city;
+    private long id;
+    private String universityName;
+    private int numberOfLectureHalls;
+    private long cityID;
 
     public TUniversity() {
     }
 
-    public String getName() {
-        return name;
+    public String getUniversityName() {
+        return universityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
     }
 
-    public String getNumberOfLectureHalls() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getNumberOfLectureHalls() {
         return numberOfLectureHalls;
     }
 
-    public void setNumberOfLectureHalls(String numberOfLectureHalls) {
+    public void setNumberOfLectureHalls(int numberOfLectureHalls) {
         this.numberOfLectureHalls = numberOfLectureHalls;
     }
 
-    public String getCity() {
-        return city;
+    public long getCityID() {
+        return cityID;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityID(long cityID) {
+        this.cityID = cityID;
     }
 }

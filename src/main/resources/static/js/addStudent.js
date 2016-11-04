@@ -9,8 +9,8 @@ function addStudent() {
     student.gender = $("#gender").val();
     student.semester = $("#semester").val();
     student.grade = $("#grade").val();
-    student.university = $("#university").val();
-    student.faculty = $("#faculty").val();
+    student.universityID = $("#university").val();
+    student.facultyID = $("#faculty").val();
 
     //Make the add call
     $.ajax({

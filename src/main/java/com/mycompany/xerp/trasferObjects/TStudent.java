@@ -22,14 +22,15 @@ import java.io.Serializable;
  */
 public class TStudent implements Serializable {
 
+    private long id;
     private String name;
     private String surname;
     private String dateOfBirth;
-    private String gender;
-    private String semester;
-    private String grade;
-    private String university;
-    private String faculty;
+    private boolean gender;
+    private int semester;
+    private double grade;
+    private long universityID;
+    private long facultyID;
 
     public TStudent() {
     }
@@ -58,43 +59,51 @@ public class TStudent implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getGender() {
+    public boolean isGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 
-    public String getSemester() {
+    public int getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(int semester) {
         this.semester = semester;
     }
 
-    public String getGrade() {
+    public double getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(double grade) {
         this.grade = grade;
     }
 
-    public String getUniversity() {
-        return university;
+    public long getId() {
+        return id;
     }
 
-    public void setUniversity(String university) {
-        this.university = university;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getFaculty() {
-        return faculty;
+    public long getUniversityID() {
+        return universityID;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public void setUniversityID(long universityID) {
+        this.universityID = universityID;
+    }
+
+    public long getFacultyID() {
+        return facultyID;
+    }
+
+    public void setFacultyID(long facultyID) {
+        this.facultyID = facultyID;
     }
 }

@@ -22,6 +22,7 @@ import java.io.Serializable;
  */
 public class TFaculty implements Serializable {
 
+    private long id;
     private String name;
 
     public TFaculty() {
@@ -35,4 +36,11 @@ public class TFaculty implements Serializable {
         this.name = name;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

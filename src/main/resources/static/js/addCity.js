@@ -4,7 +4,7 @@ function addCity() {
 
     var city = new Object();
     city.name = $("#cityName").val();
-    city.country = $("#countryName").val();
+    city.countryID = $("#country").val();
 
     //Make the add call
     $.ajax({
