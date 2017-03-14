@@ -2,4 +2,4 @@
 applications:
   - name: xerp
     buildpack: java_buildpack
-    path: target/xerp-1.0.0.BUILD-SNAPSHOT.jar
+    path: target/xerp-1.0.0.jar

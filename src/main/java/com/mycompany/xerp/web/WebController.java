@@ -4,7 +4,6 @@ import com.mycompany.xerp.domain.*;
 import eu.paasword.annotations.PaaSwordPEP;
 import eu.paasword.jpa.PaaSwordEntityHandler;
 import eu.paasword.jpa.exceptions.ProxyInitializationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -167,7 +166,7 @@ public class WebController {
         return "addCity";
     }
 
-    @PaaSwordPEP("webAccessPolicy")
+    @PaaSwordPEP(value = "webAccessPolicy")
     @RequestMapping(value = "/country", method = RequestMethod.GET)
     public String countries(Model model) {
         logger.log(Level.INFO, "Success login for user: {0} , with userID: {1} and role: {2}", new Object[]{getCurrentUser().getUsername()});//, getCurrentUser().getId(), getCurrentUser().getRole()});

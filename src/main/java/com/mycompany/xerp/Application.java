@@ -15,7 +15,7 @@
  */
 package com.mycompany.xerp;
 
-import eu.paasword.paaswordlibrary.api.PaaSwordAPI;
+import eu.paasword.paaswordlibrary.service.PaaSwordService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -34,10 +34,8 @@ public class Application {
     }
 
     @Bean
-    public PaaSwordAPI paaSwordAPI() {
-        return new PaaSwordAPI("http://app.paasword.eu", "00c34888-50c6-4368-a5da-da2e8e321824", "com.mycompany.xerp", true);
-//        return new PaaSwordAPI("http://192.168.3.51:8080", "00c34888-50c6-4368-a5da-da2e8e321824", "com.mycompany.xerp", true);
-//        return new PaaSwordAPI("http://localhost:8080", "00c34888-50c6-4368-a5da-da2e8e321824", "com.mycompany.xerp", true);
+    public PaaSwordService paaSwordAPI() {
+        return PaaSwordService.getInstance("http://app.paasword.eu", "baeb8701-3e24-4f7d-a080-b920a2dd6177");
     }
 
 }
